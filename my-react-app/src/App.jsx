@@ -10,22 +10,21 @@ function App() {
   const ref = useRef()
   const inputRef = useRef()
 
-  const identic = (element)=>{
-    items.forEach((el)=>{
-        if(el.newData === element.newData){
-          element.newKM += el.newKM;
-        } else{ element.newKM}
-        
-    })
-  }
+ 
 
   const addItem = (newData, newKM) => {
   const id = items.length? items[items.length -1].id + 1: 1
-  const updateItem = {id, newData, newKM}
-  identic(updateItem)
-  const updateItems = [...items, updateItem]
-  updateItems.sort((a, b) => new Date(a.newData) - new Date(b.newData));
-  setItems(updateItems)
+  const newItem = items.find(el => el.newData === newData)
+  if(newItem){
+    newItem.newKM = parseInt(newItem.newKM) + parseInt(newKM)
+    setItems(items)
+  }else{
+    const updateItem = {id, newData, newKM}
+    const updateItems = [...items, updateItem]
+    updateItems.sort((a, b) => new Date(a.newData) - new Date(b.newData));
+    setItems(updateItems)
+  }
+   
   }
 
   const hendalSubmit = (e) =>{
@@ -73,7 +72,7 @@ const deleteItem = (id)=>{
       
       </div>
       </form>
-  < AddItem items={items} setItems={setItems} hendalSubmit={hendalSubmit} deleteItem={deleteItem} identic={identic}/>
+  < AddItem items={items} setItems={setItems} hendalSubmit={hendalSubmit} deleteItem={deleteItem} />
   </>
   )
 }

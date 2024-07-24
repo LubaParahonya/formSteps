@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import { FaTrashAlt  } from "react-icons/fa";
 
-const AddItem = ({items, setItems, deleteItem, identic}) => {
+const AddItem = ({items, setItems, deleteItem}) => {
     
     
   return (
